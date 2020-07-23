@@ -59,6 +59,9 @@ class LinkedList:
     def remove_head(self):
         return self.remove(False)
 
+    def remove_tail(self):
+        return self.remove()
+
     def contains(self, value):
         node = self.head
         while node is not None:
