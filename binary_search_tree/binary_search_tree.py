@@ -9,28 +9,62 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
+
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
 
+    # class BinarySearchTree:
+    #     def __init__(self, value):
+    #         self.root = BSTNode(value)
+
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        if value <= self.value:
+            if self.left is None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        elif value > self.value:
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        node = self
+        while node is not None:
+            if target == node.value:
+                return True
+            elif target > node.value:
+                node = node.right
+            elif target <= node.value:
+                node = node.left
+        return False
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        result = self.value
+        node = self.right
+        while node is not None:
+            result = node.value
+            node = node.right
+        return result
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        node = self
+        fn(node.value)
+        if node.right is not None:
+            node.right.for_each(fn)
+        if node.left is not None:
+            node.left.for_each(fn)
 
     # Part 2 -----------------------
 
@@ -60,26 +94,27 @@ class BSTNode:
     def post_order_dft(self):
         pass
 
+
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
-
-bst.insert(8)
-bst.insert(5)
-bst.insert(7)
-bst.insert(6)
-bst.insert(3)
-bst.insert(4)
-bst.insert(2)
-
-bst.bft_print()
-bst.dft_print()
-
-print("elegant methods")
-print("pre order")
-bst.pre_order_dft()
-print("in order")
-bst.in_order_dft()
-print("post order")
-bst.post_order_dft()  
+# bst = BSTNode(1)
+#
+# bst.insert(8)
+# bst.insert(5)
+# bst.insert(7)
+# bst.insert(6)
+# bst.insert(3)
+# bst.insert(4)
+# bst.insert(2)
+#
+# bst.bft_print()
+# bst.dft_print()
+#
+# print("elegant methods")
+# print("pre order")
+# bst.pre_order_dft()
+# print("in order")
+# bst.in_order_dft()
+# print("post order")
+# bst.post_order_dft()

@@ -3,6 +3,14 @@ class LinkedList:
         self.head: Node = None
         self.tail: Node = None
 
+    def __str__(self):
+        result = ''
+        node = self.head
+        while node is not None:
+            result += str(node.value)
+            node = node.nextnode
+        return result
+
     def add(self, value, tail=True):
         newnode = Node(value)
         if self.head is None:
@@ -83,6 +91,19 @@ class LinkedList:
                 node = node.nextnode
             return max
 
+    def reverse(self):
+        # Not empty nor 1 item
+        if self.head is not None and self.head != self.tail:
+            initial_tail = self.tail
+            current_node = self.head
+            while current_node is not None:
+                if current_node != initial_tail:
+                    self.tail.nextnode = current_node
+                    self.tail = current_node
+                    self.tail.nextnode = None
+                    self.head = current_node.nextnode
+                current_node = current_node.nextnode
+
 
 class Node:
     def __init__(self, value=None, next=None):
@@ -94,3 +115,15 @@ class Node:
 
     def get_next(self):
         return self.nextnode
+
+
+ll = LinkedList()
+ll.add(1)
+ll.add(2)
+ll.add(3)
+ll.add(4)
+ll.add(5)
+
+print(ll)
+ll.reverse()
+print(ll)

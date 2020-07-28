@@ -9,11 +9,14 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-            
+
+
 """
 Our doubly-linked list class. It holds references to 
 the list's head and tail nodes.
 """
+
+
 class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
@@ -39,11 +42,11 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         new_node = ListNode(value, None, self.head)
-        #Empty list
+        # Empty list
         if self.head is None and self.tail is None:
             self.head = new_node
             self.tail = new_node
-        #Not Empty
+        # Not Empty
         else:
             self.head.prev = new_node
             self.head = new_node
@@ -136,29 +139,28 @@ class DoublyLinkedList:
                 self.tail.next = node
                 self.tail = node
 
-
     """
     Deletes the input node from the List, preserving the 
     order of the other elements of the List.
     """
     def delete(self, node: ListNode):
-        #check for valid arg
+        # check for valid arg
         if node is not None:
-            #check list is not empty
+            # check list is not empty
             if not (self.head is None and self.tail is None):
-                #Check if only item in the list
+                # Check if only item in the list
                 if self.head == node and self.tail == node:
                     self.head = None
                     self.tail = None
-                #More than one item
+                # More than one item
                 else:
-                    #Are we deleting the head
+                    # Are we deleting the head
                     if self.head == node:
                         node.next.prev = None
                         self.head = node.next
                         self.length -= 1
                         return
-                    #Are we deleting the tail?
+                    # Are we deleting the tail?
                     elif self.tail == node:
                         node.prev.next = None
                         self.tail = node.prev
@@ -166,7 +168,6 @@ class DoublyLinkedList:
                         node.next.prev = node.prev
                         node.prev.next = node.next
                 self.length -= 1
-
 
     """
     Finds and returns the maximum value of all the nodes 
