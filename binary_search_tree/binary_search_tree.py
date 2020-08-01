@@ -10,8 +10,13 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from jds_queue import Queue
+
+
 
 class BSTNode:
+
+    queue: Queue()
 
     def __init__(self, value):
         self.value = value
@@ -70,8 +75,19 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self):
-        pass
+        currentNode = self
+        if currentNode.left is None and currentNode.right is None:
+            print(currentNode.value)
+            return
+        if currentNode.left is not None:
+            currentNode.left.in_order_print()
+
+        print(currentNode.value)
+
+        if currentNode.right is not None:
+            currentNode.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -88,25 +104,57 @@ class BSTNode:
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
-        pass
+        currentNode = self
+        print(currentNode.value)
+        if currentNode.left is None and currentNode.right is None:
+            # print(currentNode.value)
+            return
+        if currentNode.left is not None:
+            currentNode.left.pre_order_dft()
+        if currentNode.right is not None:
+            currentNode.right.pre_order_dft()
 
     # Print Post-order recursive DFT
     def post_order_dft(self):
-        pass
+        currentNode = self
+        if currentNode.left is None and currentNode.right is None:
+            print(currentNode.value)
+            return
+        if currentNode.left is not None:
+            currentNode.left.post_order_dft()
+        if currentNode.right is not None:
+            currentNode.right.post_order_dft()
+        print(currentNode.value)
 
 
 """
 This code is necessary for testing the `print` methods
 """
-# bst = BSTNode(1)
-#
-# bst.insert(8)
-# bst.insert(5)
-# bst.insert(7)
-# bst.insert(6)
-# bst.insert(3)
-# bst.insert(4)
-# bst.insert(2)
+bst = BSTNode(25)
+
+bst.insert(15)
+bst.insert(10)
+bst.insert(4)
+bst.insert(12)
+bst.insert(22)
+bst.insert(18)
+bst.insert(24)
+bst.insert(50)
+bst.insert(35)
+bst.insert(31)
+bst.insert(44)
+bst.insert(70)
+bst.insert(66)
+bst.insert(90)
+
+print("In Order:\n")
+bst.in_order_print()
+print("\n\nPre Order:\n")
+bst.pre_order_dft()
+print("\n\nPost Order:\n")
+bst.post_order_dft()
+
+
 #
 # bst.bft_print()
 # bst.dft_print()
